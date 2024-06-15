@@ -42,7 +42,7 @@ const timeIntervalsFormSchemma = z.object({
       return intervals.map((interval) => {
         return {
           weekDay: interval.weekDay,
-          startTimeInminutes: convertTimeStringToMinutes(interval.startTime),
+          startTimeInMinutes: convertTimeStringToMinutes(interval.startTime),
           endTimeInMinutes: convertTimeStringToMinutes(interval.endTime),
         }
       })
@@ -51,7 +51,7 @@ const timeIntervalsFormSchemma = z.object({
       (intervals) => {
         return intervals.every(
           (interval) =>
-            interval.endTimeInMinutes - 60 >= interval.startTimeInminutes,
+            interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes,
         )
       },
       {
