@@ -1,5 +1,8 @@
+import { api } from '@/lib/axios'
 import { getWeekDays } from '@/utils/get-week-days'
+import { useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
+import { useRouter } from 'next/router'
 import { CaretLeft, CaretRight } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import {
@@ -17,6 +20,10 @@ interface CalendarWeek {
     date: dayjs.Dayjs
     disabled: boolean
   }>
+}
+
+interface BlockedDates {
+  blockedWeekDays: number
 }
 
 type CalendarWeeks = CalendarWeek[]
@@ -94,9 +101,11 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
     )
 
     return calendarWeeks
-  }, [currentDate])
+  }, [currentDate, blockedDates])
 
   console.log(calendarWeeks)
+
+  const router = useRouter()
 
   function handlePreviousMonth() {
     const previousMonthDate = currentDate.subtract(1, 'month')
@@ -109,6 +118,27 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
 
     setCurrentDate(previousMonthDate)
   }
+
+  const username = String(router.query.username)
+
+  const { data: blockedDates } = useQuery<BlockedDates>({
+    queryKey: [
+      'blockedDates',
+      currentDate.get('year'),
+      currentDate.get('month'),
+    ],
+    queryFn: async () => {
+      const response = await api.get(`/users/${username}/blocked-dates`, {
+        params: {
+          year: currentDate.get('year'),
+          month: currentDate.get('month'),
+        },
+      })
+
+      return response.data
+    },
+    enabled: !!selectedDate,
+  })
 
   return (
     <CalendarContainer>
