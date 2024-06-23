@@ -51,7 +51,7 @@ export function ConfirmStep({
     onCancelConfirmConfirmation()
   }
 
-  const describeDate = dayjs(schedulingDate).format('DDD[ de ]MMMM[ de ]YYYY')
+  const describeDate = dayjs(schedulingDate).format('DD[ de ]MMMM[ de ]YYYY')
 
   const describedTime = dayjs(schedulingDate).format('HH:mm[h]')
 
