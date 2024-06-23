@@ -44,6 +44,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
       const response = await api.get(`/users/${username}/availability`, {
         params: {
           date: selectedDateWithoutTime,
+          timezoneOffset: selectedDate ? selectedDate.getTimezoneOffset() : 0,
         },
       })
 
@@ -61,6 +62,8 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
     onSelectDateTime(dateWithTime)
   }
 
+
+
   return (
     <Container isTimePickerOpen={isDateSelected}>
       <Calendar selectedDate={selectedDate} onDateSelected={setSelectedDate} />
@@ -72,10 +75,11 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
           </TimePickerHeader>
           <TimePickerList>
             {availability?.possibleTimes.map((hour) => {
+            
               return (
                 <TimePickerItem
                   key={hour}
-                  disabled={!availability.availableTimes.includes(hour)}
+                  disabled={!availability?.availableTimes.includes(hour)}
                   onClick={() => handleSelectTime(hour)}
                 >
                   {String(hour).padStart(2, '0')}:00h
