@@ -8,7 +8,8 @@ Ignite Call é uma aplicação que permite aos usuários agendar reuniões de fo
 <br>
 
 <h1 align="center">
-    ![image](https://github.com/user-attachments/assets/0ee60d8a-6626-4e73-9fbf-05fc96c07efc)
+    
+![image](https://github.com/user-attachments/assets/0ee60d8a-6626-4e73-9fbf-05fc96c07efc)
     ![image](https://github.com/user-attachments/assets/0f670347-0383-4429-b0df-9dc7110d2f9f)
     ![image](https://github.com/user-attachments/assets/03b6b487-b880-414f-9f3c-6e2bec30867e)
 
